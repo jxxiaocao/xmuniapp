@@ -1,0 +1,1 @@
+<template name="6d268798"><view class="_view data-v-41ee7f64 someone-buy {{showAndHide}}"><image class="_img data-v-41ee7f64 avator" src="{{src}}" alt></image><text class="_text data-v-41ee7f64 username">{{data[index].virtualUser.userName}}</text><text class="_text data-v-41ee7f64 content">{{data[index].description}}</text></view></template>

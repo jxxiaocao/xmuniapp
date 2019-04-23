@@ -1,0 +1,151 @@
+{
+	"pages": [ 
+		{
+			"path" : "pages/index/index",
+			"style" : {
+				// #ifdef MP 
+				"navigationStyle": "custom",
+				// #endif 
+				"app-plus": {
+					"titleNView": {
+						"type": "transparent",
+						"searchInput": {
+							"backgroundColor": "rgba(231, 231, 231,.7)",
+							"borderRadius": "16px",
+							"placeholder": "请输入地址 如：大钟寺",
+							"disabled": true,
+							"placeholderColor": "#606266"
+						},
+						"buttons": [
+							{
+								"fontSrc": "/static/yticon.ttf",
+								"text": "\ue60d",
+								"fontSize": "26",
+								"color":"#303133",
+								"float": "left",
+								"background": "rgba(0,0,0,0)"
+							},
+							{
+								"fontSrc": "/static/yticon.ttf",
+								"text": "\ue744",
+								"fontSize": "27",
+								"color":"#303133",
+								"background": "rgba(0,0,0,0)",
+								"redDot": true
+							}
+						]
+					}
+				}
+			}
+		},
+        {
+			"path":"pages/class/class",
+			"style":{
+				"navigationBarTitleText":"分类"
+			}
+		},
+//         {
+// 		    "path" : "pages/cart/cart",
+// 		    "style" : {
+// 		        "navigationBarTitleText" : "购物车"
+// 		    }
+// 		},
+		{
+		    "path" : "pages/detail/detail",
+		    "style" : {
+		        "navigationBarTitleText" : "商品详情"
+		    }
+		},{
+		    "path" : "pages/share/share",
+		    "style" : {
+		        "navigationBarTitleText" : "分享"
+		    }
+		},{
+		    "path" : "pages/address/address-list",
+		    "style" : {
+		        "navigationBarTitleText" : "用户地址"
+		    }
+		},{
+            "path" : "pages/public/login",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "navigationStyle" : "custom",
+                "app-plus" : {
+                    "titleNView" : false,
+					"animationType": "slide-in-bottom"
+                }
+            }
+        }, {
+            "path" : "pages/user/user",
+            "style" : {
+            	"navigationBarTitleText" : "我的",
+				// #ifdef MP
+				"navigationStyle": "custom",
+				// #endif
+				"app-plus": {
+					"bounce": "none",
+					"titleNView": {
+						"type": "transparent",
+						"bounce": "none",
+						"buttons": [
+							{
+								"fontSrc": "/static/yticon.ttf",
+								"text": "\ue60f",
+								"fontSize": "24",
+								"color":"#303133",
+								"width":"46px",
+								"background": "rgba(0,0,0,0)"
+							},
+							{
+								"fontSrc": "/static/yticon.ttf",
+								"text": "\ue744",
+								"fontSize": "28",
+								"color":"#303133",
+								"background": "rgba(0,0,0,0)",
+								"redDot": true
+							}
+						]
+					}
+				}
+            }
+        }
+    ],
+	 "globalStyle" : {
+	    "navigationBarTextStyle" : "black",
+	    "navigationBarTitleText" : "首页",
+	    "navigationBarBackgroundColor" : "#FFFFFF",
+	    "backgroundColor" : "#ff4443"
+	},
+	"tabBar" : {
+	    "color" : "#C0C4CC",
+	    "selectedColor" : "#fa436a",
+	    "borderStyle" : "black",
+	    "backgroundColor" : "#ffffff",
+	    "list" : [
+	        {
+	            "pagePath" : "pages/index/index",
+	            "iconPath" : "static/tab-home.png",
+	            "selectedIconPath" : "static/tab-home-current.png",
+	            "text" : "首页"
+	        },
+			{
+				"pagePath":"pages/class/class",
+				"iconPath":"static/arc.png",
+				 "selectedIconPath" : "static/tab-home-current.png",
+				"text" : "分类"
+			},
+// 	        {
+// 	            "pagePath" : "pages/cart/cart",
+// 	            "iconPath" : "static/tab-cart.png",
+// 	            "selectedIconPath" : "static/tab-cart-current.png",
+// 	            "text" : "购物车"
+// 	        },
+			{
+			    "pagePath" : "pages/user/user",
+			    "iconPath" : "static/tab-my.png",
+			    "selectedIconPath" : "static/tab-my-current.png",
+			    "text" : "我的"
+			}
+	    ]
+	}
+}

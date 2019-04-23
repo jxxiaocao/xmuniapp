@@ -1,0 +1,1 @@
+<template name="a30253bc"><view class="_view data-v-920a3fb0 back-top {{show ? 'show' : ''}}" bindtap="handleProxy" data-eventid="{{'a30253bc-0'}}" data-comkey="{{$k}}"><view class="_view data-v-920a3fb0 back-bg"><view class="_view data-v-920a3fb0 iconfont icon-shang"></view></view></view></template>
