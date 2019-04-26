@@ -1,1 +1,0 @@
-<template name="55742a78"><view class="_view 55742a78 radio {{[widthDefault ? 'radio-width-default' : '']}}" bindtap="handleProxy" data-eventid="{{'55742a78-0'}}" data-comkey="{{$k}}" style=" {{checked ? activeStyle : itemStyle}}">{{name}}</view></template>
