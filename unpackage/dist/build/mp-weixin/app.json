@@ -2,6 +2,7 @@
   "pages": [
     "pages/index/index",
     "pages/class/class",
+    "pages/cate/cate",
     "pages/detail/detail",
     "pages/share/share",
     "pages/address/address-list",
@@ -35,11 +36,18 @@
         "text": "分类"
       },
       {
+        "pagePath": "pages/cate/cate",
+        "iconPath": "static/arc.png",
+        "selectedIconPath": "static/tab-home-current.png",
+        "text": "分类1"
+      },
+      {
         "pagePath": "pages/user/user",
         "iconPath": "static/tab-my.png",
         "selectedIconPath": "static/tab-my-current.png",
         "text": "我的"
       }
     ]
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }
