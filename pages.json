@@ -152,7 +152,6 @@
 // 	            "selectedIconPath" : "static/tab-cart-current.png",
 // 	            "text" : "购物车 "
 // 	        },
-//			123test
 			{
 			    "pagePath" : "pages/user/user",
 			    "iconPath" : "static/tab-my.png",
