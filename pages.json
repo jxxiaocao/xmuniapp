@@ -147,7 +147,7 @@
 				"text" : "分类1"
 			},
 // 	        {
-// 	            "pagePath" : "pages/cart/cart",11
+// 	            "pagePath" : "pages/cart/cart"
 // 	            "iconPath" : "static/tab-cart.png",
 // 	            "selectedIconPath" : "static/tab-cart-current.png",
 // 	            "text" : "购物车 "
