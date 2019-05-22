@@ -150,8 +150,9 @@
 // 	            "pagePath" : "pages/cart/cart",11
 // 	            "iconPath" : "static/tab-cart.png",
 // 	            "selectedIconPath" : "static/tab-cart-current.png",
-// 	            "text" : "购物车"
+// 	            "text" : "购物车 "
 // 	        },
+//			123test
 			{
 			    "pagePath" : "pages/user/user",
 			    "iconPath" : "static/tab-my.png",
