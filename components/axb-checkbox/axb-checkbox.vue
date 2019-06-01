@@ -1,6 +1,6 @@
 <template>
 	<view class="style-flex style-flex-wrap">
-		<filter-radio-item v-for="(item, idx) in items" :key="idx" :name="item.name" :value="item.value" :price="item.price" :checked="item.checked" @change="radioChange"></filter-radio-item>
+		<filter-radio-item v-for="(item, idx) in items" :key="idx"  :value="item.value" :price="item.price" :checked="item.checked" @change="radioChange"></filter-radio-item>
 	</view>
 </template>
 

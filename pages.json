@@ -38,16 +38,16 @@
 				}
 			}
 		},
-        {
-			"path":"pages/class/class",
-			"style":{
-				"navigationBarTitleText":"分类"
-			}
-		},
+//         {
+// 			"path":"pages/class/class",
+// 			"style":{
+// 				"navigationBarTitleText":"分类"
+// 			}
+// 		},
 		{
 			"path":"pages/cate/cate",
 			"style":{
-				"navigationBarTitleText":"分类1"
+				"navigationBarTitleText":"分类"
 			}
 		},
 //         {

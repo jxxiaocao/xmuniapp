@@ -113,7 +113,7 @@
 				</text>
 				<text>首页</text>
 			</navigator>
-			<navigator url="/pages/cart/cart" open-type="switchTab" class="p-b-btn">
+			<navigator url="/pages/cart/cart" open-type="switchTab" class="p-b-btn" >
 				<text class="yticon ">
 					<image src="../../static/tab-cart-current.png"  class="car-img yticon-img"></image>
 				</text>
@@ -125,8 +125,8 @@
 			</view>
 			
 			<view class="action-btn-group">
-				<button type="primary" class=" action-btn no-border buy-now-btn">立即购买</button>
-				<button type="primary" class=" action-btn no-border add-cart-btn">加入购物车</button>
+				<button type="primary" class=" action-btn no-border buy-now-btn" @click="toggleSpec">立即购买</button>
+				<button type="primary" class=" action-btn no-border add-cart-btn" @click="toggleSpec">加入购物车</button>
 			</view>
 		</view>
 		

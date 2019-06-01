@@ -6,10 +6,10 @@
 		</view>
 		<view class="m-text">
 			<view class="m-title">
-				{{rowData.name}}
+				{{rowData.goods_name}}
 			</view>
 			<view class="m-descripe">
-				{{rowData.descripe}}
+				{{rowData.reduce_price}}
 			</view>
 			<view>
 				<view class="m-price">

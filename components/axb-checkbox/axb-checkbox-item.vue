@@ -50,7 +50,7 @@ const debounce = function (fun, delay, immediate) {
 		},
 		computed: {
 			widthDefault() {
-				return this.name.length <= 3
+				// return this.name.length <= 3
 			},
 			activeStyle() {
 				return `background: #d5e4fd;color: #3c7ef6;border-color: #3c7ef6;`
@@ -75,5 +75,5 @@ const debounce = function (fun, delay, immediate) {
 </script>
 
 <style>
-	.radio{display:inline-block;height:60upx;line-height:60upx;padding:0 22upx;border-radius:10upx;font-size:26upx;box-sizing:border-box;border:1px solid #c3c3c3;}.radio:not(:last-child){margin:0 20upx 30upx 0;}.radio-width-default{width:120upx;text-align:center;padding:0;background:#fff !important;}
+	.radio{display:inline-block;height:55upx;line-height:55upx;padding:0 22upx;border-radius:10upx;font-size:26upx;box-sizing:border-box;border:1px solid #c3c3c3;}.radio:not(:last-child){margin:0 20upx 18upx 0;}.radio-width-default{width:120upx;text-align:center;padding:0;background:#fff !important;}
 </style>

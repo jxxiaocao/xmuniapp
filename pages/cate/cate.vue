@@ -48,48 +48,76 @@
 		<m-footer-car :price="'￥'+carPrice" :num="carNum" @handleFn="showSpec(false)"></m-footer-car>
 		
 		 <!-- 弹出层 -->
-		<view class="uni-banner" style="background:#FFFFFF;" v-if="specBannerShow">
-			<div>
-					<view>
-						<view class="page">
-							<div style="text-align: center;">
-								   <span class="pop-up-title1">
-									  蔬菜001号(中关村店)
-								   </span>
-								   <a class="pop-up-title2 uni-icon uni-icon-close" href="javascript:void(0);"  @tap="closeBanner"></a>
-							</div>
-							
-					
-							
-							<!-- <view v-for="(foods,index) in classifyData" :key="index" class="box"> -->
-							<div style="position: relative;height: 12.416rem;overflow: hidden;width: 100%;overflow-y: scroll;">
-								<div>
-									<ul>
-										<li>
-											<view class="totalPriceWrapper"></view>
-											<view class="uni-padding-wrap uni-common-mt" v-for="(foods,index) in natureArr" :key="index">
-												<view class="uni-title uni-common-mt">{{foods.naturename}}</view>
-												
-												<view>
-														<view class="filter-body-section-body style-flex style-flex-wrap">
-															
-															<view class="style-flex style-flex-wrap">
-																<filter-radio-item v-for="(item, idx) in foods.data" :key="idx" :name="item.name" :value="BannerGoodsInfo.goods_id+foods.naturename+item.value" :price="item.price" :checked="item.checked" @change="radioChangeTypes(BannerGoodsInfo.goods_id,foods,item,item.value)"></filter-radio-item>
-															</view>
-															
-														</view>
-												</view>
-											
-											</view>
-										</li>	
-									
-							        </ul>
-								</div>
-							</div>
-						</view>
+		<!-- 规格-模态层弹窗 -->
+		<view 
+			class="popup spec" 
+			:class="isSpecClass"
+			@touchmove.stop.prevent="stopPrevent"
+		>
+			<!-- 遮罩层 -->
+			<view class="mask"></view>
+			<view class="layer attr-content">
+				<view class="a-t" style="width:100%;">
+					<div style="width: 86%;">
+						   <span class="pop-up-title1">
+							  蔬菜001号(中关村店)
+						   </span>
+						   <!-- <a class="pop-up-title2 uni-icon uni-icon-close" href="javascript:void(0);"  @tap="closeBanner"></a> -->
+					</div>
+					<!-- <image src="https://gd3.alicdn.com/imgextra/i3/0/O1CN01IiyFQI1UGShoFKt1O_!!0-item_pic.jpg_400x400.jpg"></image> -->
+					<view class="right">
+						<a class="pop-up-title2 uni-icon uni-icon-close" href="javascript:void(0);"  @tap="closeBanner"></a>
+
+					<!-- 	<text class="price">¥328.00</text>
+						<text class="stock">库存：188件</text>
+						<view class="selected">
+							已选：
+							<text class="selected-text" v-for="(sItem, sIndex) in specSelected" :key="sIndex">
+								{{sItem.name}}
+							</text>
+						</view> -->
+					</view>
 				</view>
 				
-				<!-- 底部 -->
+ 					<div style="position: relative;height:66%;overflow: hidden;width: 100%;overflow-y: scroll;">
+		<!--			<div>
+						<ul>
+							<li> -->
+								<view class="totalPriceWrapper"></view>
+								<!-- <view class="uni-padding-wrap uni-common-mt attr-list" v-for="(foods,index) in natureArr" :key="index"> -->
+								<view class="attr-list" v-for="(foods,index) in natureArr" :key="index">
+									<view class="item-title">{{foods.naturename}}</view>
+									
+									<view class="item-list">
+											<view class="filter-body-section-body style-flex style-flex-wrap">
+												
+												<view class="style-flex style-flex-wrap">
+													<filter-radio-item v-for="(item, idx) in foods.data" :key="idx" :name="item.name" :value="BannerGoodsInfo.goods_id+foods.naturename+item.value" :price="item.price" :checked="item.checked" @change="radioChangeTypes(BannerGoodsInfo.goods_id,foods,item,item.value)"></filter-radio-item>
+												</view>
+												
+											</view>
+									</view>
+								
+								</view>
+						<!-- 	</li>	
+						
+				        </ul>
+					</div> -->
+				</div>
+				<!-- <view v-for="(item,index) in specList" :key="index" class="attr-list">
+					<text>{{item.name}}</text>
+					<view class="item-list">
+						<text 
+							v-for="(childItem, childIndex) in specChildList" 
+							v-if="childItem.pid === item.id"
+							:key="childIndex" class="tit"
+							:class="{selected: childItem.selected}"
+							@click="selectSpec(childIndex, childItem.pid)"
+						>
+							{{childItem.name}}
+						</text>
+					</view>
+				</view> -->
 				<view class="uni-card-footer">
 					<view class="info">
 						<view>
@@ -97,22 +125,26 @@
 						</view>
 					</view>
 					<view class="numInput">
-							<text class="reduce iconfont"  @tap="changeCountPop(BannerGoodsInfo,-1,BannerGoodsInfo.cart_id)" :class="isCheckGoodsNum == 0 ? 'numbox-disabled' : ''">-</text>
-							<input type="number"  v-model="isCheckGoodsNum" :id="isCheckGoodsNum" @input="inputCarCount" />
-							<text class="plus iconfont" @tap="changeCountPop(BannerGoodsInfo,1,BannerGoodsInfo.cart_id)">+</text>
+							<!-- <text class="reduce iconfont"  @tap="changeCountPop(BannerGoodsInfo,-1,BannerGoodsInfo.cart_id)" :class="isCheckGoodsNum == 0 ? 'numbox-disabled' : ''">-</text> -->
+							<!-- <input type="number"  v-model="isCheckGoodsNum" :id="isCheckGoodsNum" @input="inputCarCount" /> -->
+							<!-- <text class="plus iconfont" @tap="changeCountPop(BannerGoodsInfo,1,BannerGoodsInfo.cart_id)">+</text> -->
 					</view>
 				</view>
 				
-				<view class="uni-card-footer">
+				    <button class="btn" @tap="popConfirm()">确定</button>
+				
+				
+				
+				<!-- <view class="uni-card-footer">
 							<text class="uni-card-footer-confirm" @tap="popConfirm()">确定</text>
-				</view>
-			</div>
+				</view> -->
+				
+			</view>
+			
 		</view>
-		
-		<view class="uni-mask" v-if="specBannerShow"></view>
 		<!-- 弹出层 #endif -->
 		
-		<!-- 规格-模态层弹窗 -->
+		<!-- 购物车规格-模态层弹窗 -->
 		<view v-if="bannerShow">
 			<view class="popup spec" :class="specClass" @touchmove.stop.prevent="discard" @tap="hideSpec">
 				<!-- 遮罩层 -->
@@ -134,13 +166,14 @@
 						</view>
 						<view v-for="(item,index) in insideCarGoods" :key="index" class="m-shopcar-item">
 							<view class="m-title">
-								{{item.name}}
+								{{item.goods_name}}
+								<view class="pop-spec">{{item.goods_name}}</view>
 							</view>
 							<view class="m-price">
 								{{item.price}}
 							</view>
 							<view class="m-controne">
-								<uni-number-box :rowData="item" @change="bindChange" :min="0" :max="9"></uni-number-box>
+								<uni-number-box :rowData="item" @change="bindChange" :min="item.num" :max="9"></uni-number-box>
 							</view>
 						</view>
 					</view>
@@ -164,42 +197,42 @@
 	import uniNumberBox from "@/components/uni-number-box/uni-number-box.vue" // 加减数字
 	// 抛物线计算
 	function bezier (pots, amount) {
-	  var pot;
-	  var lines;
-	  var ret = [];
-	  var points;
-	  for (var i = 0; i <= amount; i++) {
-	    points = pots.slice(0);
-	    lines = [];
-	    while (pot = points.shift()) {
-	      if (points.length) {
-	        lines.push(pointLine([pot, points[0]], i / amount));
-	      } else if (lines.length > 1) {
-	        points = lines;
-	        lines = [];
-	      } else {
-	        break;
-	      }
-	    }
-	    ret.push(lines[0]);
-	}
-	function pointLine(points, rate) {
-	    var pointA, pointB, pointDistance, xDistance, yDistance, tan, radian, tmpPointDistance;
-	    var ret = [];
-	    pointA = points[0];//点击
-	    pointB = points[1];//中间
-	    xDistance = pointB.x - pointA.x;
-	    yDistance = pointB.y - pointA.y;
-	    pointDistance = Math.pow(Math.pow(xDistance, 2) + Math.pow(yDistance, 2), 1 / 2);
-	    tan = yDistance / xDistance;
-	    radian = Math.atan(tan);
-	    tmpPointDistance = pointDistance * rate;
-	    ret = {
-	      x: pointA.x + tmpPointDistance * Math.cos(radian),
-	      y: pointA.y + tmpPointDistance * Math.sin(radian)
-	    };
-	    return ret;
-	  }
+		  var pot;
+		  var lines;
+		  var ret = [];
+		  var points;
+		  for (var i = 0; i <= amount; i++) {
+			points = pots.slice(0);
+			lines = [];
+			while (pot = points.shift()) {
+			  if (points.length) {
+				lines.push(pointLine([pot, points[0]], i / amount));
+			  } else if (lines.length > 1) {
+				points = lines;
+				lines = [];
+			  } else {
+				break;
+			  }
+			}
+			ret.push(lines[0]);
+		}
+		function pointLine(points, rate) {
+				var pointA, pointB, pointDistance, xDistance, yDistance, tan, radian, tmpPointDistance;
+				var ret = [];
+				pointA = points[0];//点击
+				pointB = points[1];//中间
+				xDistance = pointB.x - pointA.x;
+				yDistance = pointB.y - pointA.y;
+				pointDistance = Math.pow(Math.pow(xDistance, 2) + Math.pow(yDistance, 2), 1 / 2);
+				tan = yDistance / xDistance;
+				radian = Math.atan(tan);
+				tmpPointDistance = pointDistance * rate;
+				ret = {
+				  x: pointA.x + tmpPointDistance * Math.cos(radian),
+				  y: pointA.y + tmpPointDistance * Math.sin(radian)
+				};
+				return ret;
+		}
 	  return {
 	    'bezier_points': ret
 	  };
@@ -208,10 +241,17 @@
 		components:{
 			mStorePro,
 			uniNumberBox,
-			mFooterCar
+			mFooterCar,
+			filterRadioItem
 		},
 		data() {
 			return {
+				isSpecClass: 'none',   //6.1
+				specClass: 'none',
+				
+				
+				
+				specShow:false,
 				// 购物车小球动画start
 				 hide_good_box: false,
 				 bus_x:0,
@@ -232,7 +272,7 @@
 				carNum:0, //加入到购物车的总个数
 				insideCarGoods:[],// 加入到购物车的商品列表
 				
-				specClass: '',//规格弹窗css类，控制开关动画
+				specClass: '',//购物车规格弹窗css类，控制开关动画
 				showCategoryIndex:0,
 				//商品分类信息列表
 				categoryList:[
@@ -243,7 +283,7 @@
 					{   
 						cart_id:1,
 						id:1,
-						name:'精品秋葵600g',
+						goods_name:'精品秋葵600g',
 						descripe:"脆糯营养，口感好，健康绿色",
 						img:'../../static/img/1.jpg',
 						price:"￥9",
@@ -255,7 +295,7 @@
 					{   
 						cart_id:1,
 						id:2,
-						name:'精品秋葵600g',
+						goods_name:'精品秋葵600g',
 						descripe:"脆糯营养，口感好，健康绿色",
 						img:'../../static/img/2.jpg',
 						price:"￥8",
@@ -332,6 +372,21 @@
 			}
 		},
 		methods:{
+				//规格弹窗开关 //6.1
+	        toggleSpec() {
+				this.isSpecClass = 'show';
+			},
+			//统一的关闭popup方法
+			hidePopup: function() {
+				// this.isSpecClass = 'none';
+				setTimeout(() => {
+					this.isSpecClass = 'none';
+				}, 250);
+				// this.bannerShow = false;
+			},
+			closeBanner: function() {
+			    this.hidePopup();
+			},
 			//分类切换显示
 			showCategory(index){
 				this.showCategoryIndex = index;
@@ -373,9 +428,8 @@
 				if(type==-1){
 					data.goods_num--;
 				} else if(type==2){
-					console.log(123);
+					//有规格可以选择
 					this.specBannerShows(data);
-					
 				}else{
 					if(this.timer){ // 清除一下动画
 						clearInterval(this.timer);
@@ -396,11 +450,12 @@
 					  topPoint['x'] = (this.busPos['x'] - this.finger['x']) / 2 + this.finger['x'];
 					}
 					data.goods_num++;
+					data.goodsChooseSpec = data.id+data.goods_name; 
 					this.linePos = bezier([this.busPos, topPoint, this.finger], 30);
 					this.startAnimation(e,data);
 				}
 			},
-				//弹出层
+			//规格 弹出层
 			specBannerShows: function(val) {
 				this.specBannerShow = true;
 				this.popNature = '';
@@ -412,7 +467,18 @@
 				this.goodsid = val.goods_id;
 				this.natureArr = val.nature;
 			    this.isCheckGoodsNum = 1;
+				this.toggleSpec();
 				// this.handleChange('','',true)
+			},
+			//弹出点击确定
+			popConfirm(){
+				let goods_name = this.BannerGoodsInfo.goods_name;
+				let goods_img = this.BannerGoodsInfo.goods_image_url;
+				let goodsId = this.BannerGoodsInfo.goods_id;
+				this.BannerGoodsInfo.goods_num = this.BannerGoodsInfo.goods_num+parseInt(this.isCheckGoodsNum);         //当前商品数量
+				this.totalGoodsNum = this.totalGoodsNum+parseInt(this.isCheckGoodsNum);
+				// this.setProDetail(goodsId,this.popPrice,goods_name,goods_img,this.popNature,this.popNature2,parseInt(this.isCheckGoodsNum));      //加入购物车
+				this.hidePopup();
 			},
 			//点 动态
 			startAnimation: function (e,data) {
@@ -434,12 +500,12 @@
 					}
 				}, 25);
 			},
-			// 购物车价钱与个数计算， 根据你的需求计算
+			// 购物车价钱与个数计算， 根据你的需求计算(加入购物车，并且结算)
 			addGoodSum(e,data){
 				let newdata = {...data};
 				let price = data.price.replace("￥",'');
 				data.num=1;
-				let index = this.insideCarGoods.findIndex(item=>item.id==newdata.id);
+				let index = this.insideCarGoods.findIndex(item=>item.goodsChooseSpec==newdata.goodsChooseSpec);
 				if(index==-1){
 					this.insideCarGoods.push(data);
 				}else{
@@ -475,6 +541,76 @@
 				this.carPrice=price;
 				this.carNum=num;
 			},
+			
+			//6.1 s
+				// 单选时
+			radioChangeTypes(goodsid,foods,itmes,e) {
+				let max = foods.maxchoose
+				let gnt = goodsid+foods.naturename;
+				this.handleChange(e,gnt,false)
+			},
+			handleChange:function(val,type,mn){
+				// 是否为全部
+				let narr = this.BannerGoodsInfo.nature;
+				console.log(narr);
+				let goods_name = this.BannerGoodsInfo.goods_name;
+				let goodsId = this.BannerGoodsInfo.goods_id;
+				let total_spe_price = 0;
+				let num = parseInt(this.isCheckGoodsNum);
+				let max = 1;
+				for(let i =0; i<narr.length;i++){
+					const arr = []
+					let n=1
+					let ismu = true
+					let nature_name = narr[i].naturename;
+					
+					for(let m=0;m<narr[i].data.length;m++){
+						let r = {}
+						r.name = narr[i].data[m].name
+						r.price = narr[i].data[m].price
+						r.value = narr[i].data[m].value
+						if(mn){
+							if(m==0){
+								r.checked = true
+							}else{
+								r.checked = false
+							}
+						}else{
+							if(goodsId+nature_name+narr[i].data[m].value === type+val){
+								r.checked = true
+							}else{
+								if(goodsId+nature_name === type){
+									r.checked = false
+								}else{
+									r.checked = narr[i].data[m].checked
+								}
+							}
+						}
+						arr.push(r)
+					}
+					narr[i].data = arr
+				}
+				
+				//计算价格
+				let goods_price = this.BannerGoodsInfo.goods_price;
+				let goods_nature = '';
+				for(let i =0; i<narr.length;i++){
+					for(let m=0;m<narr[i].data.length;m++){
+						if(narr[i].data[m].checked){
+							total_spe_price += narr[i].data[m].price*num
+							goods_nature += narr[i].naturename+narr[i].data[m].name;
+							this.popNature2 += narr[i].data[m].name+'  |  ';
+						}
+					}
+				}
+				this.popNature = goodsId+goods_name+goods_nature;
+				let popTotalPrice = 0;
+				popTotalPrice = goods_price*num+total_spe_price;
+				this.popPrice = Number(popTotalPrice).toFixed(2);
+			},
+			
+			//6.1 e
+			
 			//清空购物车
 			clearCar(){
 				this.insideCarGoods=[];
@@ -545,6 +681,10 @@
 			100% {
 				transform: translateY(0);
 			}
+		}
+		.pop-spec{
+			font-size: 8px;
+            color: #918a8a;
 		}
 	.m-store-banner{
 		min-height: 270upx;
@@ -624,8 +764,8 @@
 			z-index: 22;
 			bottom: -70%;
 			width: 100%;
-			padding: 0;
-			height: 70%;
+			// padding: 0;
+		
 			border-radius: 20upx 20upx 0 0;
 			background-color: #fff;
 			display: flex;
@@ -892,5 +1032,509 @@
 	  z-index: +99;
 	  background:#ff582b;
 	}
+</style>
+
+<style lang='scss'>
+	page{
+		background: $page-color-base;
+		padding-bottom: 160upx;
+	}
+	.icon-you{
+		font-size: $font-base + 2upx;
+		color: #888;
+	}
+	.carousel {
+		height: 722upx;
+		position:relative;
+		swiper{
+			height: 100%;
+		}
+		.image-wrapper{
+			width: 100%;
+			height: 100%;
+		}
+		.swiper-item {
+			display: flex;
+			justify-content: center;
+			align-content: center;
+			height: 750upx;
+			overflow: hidden;
+			image {
+				width: 100%;
+				height: 100%;
+			}
+		}
+		
+	}
+	
+	/* 标题简介 */
+	.introduce-section{
+		background: #fff;
+		padding: 20upx 30upx;
+		
+		.title{
+			font-size: 32upx;
+			color: $font-color-dark;
+			height: 50upx;
+			line-height: 50upx;
+		}
+		.price-box{
+			display:flex;
+			align-items:baseline;
+			height: 64upx;
+			padding: 10upx 0;
+			font-size: 26upx;
+			color:$uni-color-primary;
+		}
+		.price{
+			font-size: $font-lg + 2upx;
+		}
+		.m-price{
+			margin:0 12upx;
+			color: $font-color-light;
+			text-decoration: line-through;
+		}
+		.coupon-tip{
+			align-items: center;
+			padding: 4upx 10upx;
+			background: $uni-color-primary;
+			font-size: $font-sm;
+			color: #fff;
+			border-radius: 6upx;
+			line-height: 1;
+			transform: translateY(-4upx); 
+		}
+		.bot-row{
+			display:flex;
+			align-items:center;
+			height: 50upx;
+			font-size: $font-sm;
+			color: $font-color-light;
+			text{
+				flex: 1;
+			}
+		}
+	}
+	/* 分享 */
+	.share-section{
+		display:flex;
+		align-items:center;
+		color: $font-color-base;
+		background: linear-gradient(left, #fdf5f6, #fbebf6);
+		padding: 12upx 30upx;
+		.share-icon{
+			display:flex;
+			align-items:center;
+			width: 70upx;
+			height: 30upx;
+			line-height: 1;
+			border: 1px solid $uni-color-primary;
+			border-radius: 4upx;
+			position:relative;
+			overflow: hidden;
+			font-size: 22upx;
+			color: $uni-color-primary;
+			&:after{
+				content: '';
+				width: 50upx;
+				height: 50upx;
+				border-radius: 50%;
+				left: -20upx;
+				top: -12upx;
+				position:absolute;
+				background: $uni-color-primary;
+			}
+		}
+		.icon-xingxing{
+			position:relative;
+			z-index: 1;
+			font-size: 24upx;
+			margin-left: 2upx;
+			margin-right: 10upx;
+			color: #fff;
+			line-height: 1;
+		}
+		.tit{
+			font-size: $font-base;
+			margin-left:10upx;
+		}
+		.icon-bangzhu1{
+			padding: 10upx;
+			font-size: 30upx;
+			line-height: 1;
+		}
+		.share-btn{
+			flex: 1;
+			text-align:right;
+			font-size: $font-sm;
+			color: $uni-color-primary;
+		}
+		.icon-you{
+			font-size: $font-sm;
+			margin-left: 4upx;
+			color: $uni-color-primary;
+		}
+	}
+	
+	.c-list{
+		font-size: $font-sm + 2upx;
+		color: $font-color-base;
+		background: #fff;
+		.c-row{
+			display:flex;
+			align-items:center;
+			padding: 20upx 30upx;
+			position:relative;
+		}
+		.tit{
+			width: 140upx;
+		}
+		.con{
+			flex: 1;
+			color: $font-color-dark;
+			.selected-text{
+				margin-right: 10upx;
+			}
+		}
+		.bz-list{
+			height: 40upx;
+			font-size: $font-sm+2upx;
+			color: $font-color-dark;
+			text{
+				display: inline-block;
+				margin-right: 30upx;
+			}
+		}
+		.con-list{
+			flex: 1;
+			display:flex;
+			flex-direction: column;
+			color: $font-color-dark;
+			line-height: 40upx;
+		}
+		.red{
+			color: $uni-color-primary;
+		}
+	}
+	
+	/* 评价 */
+	.eva-section{
+		display: flex;
+		flex-direction: column;
+		padding: 20upx 30upx;
+		background: #fff;
+		margin-top: 16upx;
+		.e-header{
+			display: flex;
+			align-items: center;
+			height: 70upx;
+			font-size: $font-sm + 2upx;
+			color: $font-color-light;
+			.tit{
+				font-size: $font-base + 2upx;
+				color: $font-color-dark;
+				margin-right: 4upx;
+			}
+			.tip{
+				flex: 1;
+				text-align: right;
+			}
+			.icon-you{
+				margin-left: 10upx;
+			}
+		}
+	}
+	.eva-box{
+		display: flex;
+		padding: 20upx 0;
+		.portrait{
+			flex-shrink: 0;
+			width: 80upx;
+			height: 80upx;
+			border-radius: 100px;
+		}
+		.right{
+			flex: 1;
+			display: flex;
+			flex-direction: column;
+			font-size: $font-base;
+			color: $font-color-base;
+			padding-left: 26upx;
+			.con{
+				font-size: $font-base;
+				color: $font-color-dark;
+				padding: 20upx 0;
+			}
+			.bot{
+				display: flex;
+				justify-content: space-between;
+				font-size: $font-sm;
+				color:$font-color-light;
+			}
+		}
+	}
+	/*  详情 */
+	.detail-desc{
+		background: #fff;
+		margin-top: 16upx;
+		.d-header{
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 80upx;
+			font-size: $font-base + 2upx;
+			color: $font-color-dark;
+			position: relative;
+				
+			text{
+				padding: 0 20upx;
+				background: #fff;
+				position: relative;
+				z-index: 1;
+			}
+			&:after{
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				transform: translateX(-50%);
+				width: 300upx;
+				height: 0;
+				content: '';
+				border-bottom: 1px solid #ccc; 
+			}
+		}
+	}
+	
+	/* 规格选择弹窗 */
+	.attr-content{
+		padding: 10upx 30upx;
+		height:50%;
+		margin-bottom:92upx;
+		.a-t{
+			display: flex;
+			image{
+				width: 170upx;
+				height: 170upx;
+				flex-shrink: 0;
+				margin-top: -40upx;
+				border-radius: 8upx;;
+			}
+			.right{
+				display: flex;
+				flex-direction: column;
+				padding-left: 24upx;
+				font-size: $font-sm + 2upx;
+				color: $font-color-base;
+				line-height: 42upx;
+				.price{
+					font-size: $font-lg;
+					color: $uni-color-primary;
+					margin-bottom: 10upx;
+				}
+				.selected-text{
+					margin-right: 10upx;
+				}
+			}
+		}
+		.attr-list{
+			display: flex;
+			flex-direction: column;
+			font-size: $font-base + 2upx;
+			color: $font-color-base;
+			/* padding-top: 30upx; */
+			padding-left: 10upx;
+		}
+		.item-list{
+			/* padding: 20upx 0 0; */
+			display: flex;
+			flex-wrap: wrap;
+			text{
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				background: #eee;
+				margin-right: 20upx;
+				margin-bottom: 20upx;
+				border-radius: 100upx;
+				min-width: 60upx;
+				height: 60upx;
+				padding: 0 20upx;
+				font-size: $font-base;
+				color: $font-color-dark;
+			}
+			.selected{
+				background: #fbebee;
+				color: $uni-color-primary;
+			}
+		}
+	}
+	
+	/*  弹出层 */
+	.popup {
+		position: fixed;
+		left: 0;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 99;
+		
+		&.show {
+			display: block;
+			.mask{
+				animation: showPopup 0.2s linear both;
+			}
+			.layer {
+				animation: showLayer 0.2s linear both;
+			}
+		}
+		&.hide {
+			.mask{
+				animation: hidePopup 0.2s linear both;
+			}
+			.layer {
+				animation: hideLayer 0.2s linear both;
+			}
+		}
+		&.none {
+			display: none;
+		}
+		.mask{
+			position: fixed;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 1;
+			background-color: rgba(0, 0, 0, 0.4);
+		}
+		.layer {
+			position: fixed;
+			z-index: 99;
+			bottom: 0;
+			width: 100%;
+			min-height: 40vh;
+			border-radius: 10upx 10upx 0 0;
+			background-color: #fff;
+			.btn{
+				height: 66upx;
+				line-height: 66upx;
+				border-radius: 100upx;
+				background: $uni-color-primary;
+				font-size: $font-base + 2upx;
+				color: #fff;
+				margin: 30upx auto 20upx;
+			}
+		}
+		@keyframes showPopup {
+			0% {
+				opacity: 0;
+			}
+			100% {
+				opacity: 1;
+			}
+		}
+		@keyframes hidePopup {
+			0% {
+				opacity: 1;
+			}
+			100% {
+				opacity: 0;
+			}
+		}
+		@keyframes showLayer {
+			0% {
+				transform: translateY(120%);
+			}
+			100% {
+				transform: translateY(0%);
+			}
+		}
+		@keyframes hideLayer {
+			0% {
+				transform: translateY(0);
+			}
+			100% {
+				transform: translateY(120%);
+			}
+		}
+	}
+	
+	/* 底部操作菜单 */
+	.page-bottom{
+		position:fixed;
+		left: 30upx;
+		bottom:30upx;
+		z-index: 95;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 690upx;
+		height: 100upx;
+		background: rgba(255,255,255,.9);
+		box-shadow: 0 0 20upx 0 rgba(0,0,0,.5);
+		border-radius: 16upx;
+		
+		.p-b-btn{
+			display:flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			font-size: $font-sm;
+			color: $font-color-base;
+			width: 96upx;
+			height: 80upx;
+			.yticon{
+				font-size: 40upx;
+				color: #ccc;
+				line-height: 48upx;
+				color: $font-color-light;
+			}
+			&.active, &.active .yticon{
+				color: $uni-color-primary;
+			}
+			.icon-fenxiang2{
+				font-size: 42upx;
+				transform: translateY(-2upx);
+			}
+			.icon-shoucang{
+				font-size: 46upx;
+			}
+		}
+		.yticon-img{
+			width: 32px;
+            height: 20px;
+		}
+		.action-btn-group{
+			display: flex;
+			height: 76upx;
+			border-radius: 100px;
+			overflow: hidden;
+			box-shadow: 0 20upx 40upx -16upx #fa436a;
+			background: linear-gradient(to right, #ffac30,#fa436a,#F56C6C);
+			margin-left: 20upx;
+			position:relative;
+			&:after{
+				content: '';
+				position:absolute;
+				top: 50%;
+				right: 50%;
+				transform: translateY(-50%);
+				height: 28upx;
+				width: 0;
+				border-right: 1px solid rgba(255,255,255,.5);
+			}
+			.action-btn{
+				display:flex;
+				align-items: center;
+				justify-content: center;
+				width: 180upx;
+				height: 100%;
+				font-size: $font-base ;
+				padding: 0;
+				border-radius: 0;
+				background: transparent;
+			}
+		}
+	}
+	
 </style>
 

@@ -46,7 +46,7 @@
 // 底部
 	.m-footer-car {
 		position: fixed;
-		bottom: 0upx;
+		bottom: 88upx;
 		width: 100%;
 		height: 99upx;
 		border-top: solid 1upx #eee;

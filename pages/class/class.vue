@@ -98,7 +98,7 @@
 														<view class="filter-body-section-body style-flex style-flex-wrap">
 															
 															<view class="style-flex style-flex-wrap">
-																<filter-radio-item v-for="(item, idx) in foods.data" :key="idx" :name="item.name" :value="BannerGoodsInfo.goods_id+foods.naturename+item.value" :price="item.price" :checked="item.checked" @change="radioChangeTypes(BannerGoodsInfo.goods_id,foods,item,item.value)"></filter-radio-item>
+																<filter-radio-item v-for="(item, idx) in foods.data" :key="idx" :name="123456" :value="BannerGoodsInfo.goods_id+foods.naturename+item.value" :price="item.price" :checked="item.checked" @change="radioChangeTypes(BannerGoodsInfo.goods_id,foods,item,item.value)"></filter-radio-item>
 															</view>
 															
 														</view>
