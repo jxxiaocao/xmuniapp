@@ -134,12 +134,12 @@
 	            "selectedIconPath" : "static/tab-home-current.png",
 	            "text" : "首页"
 	        },
-			{
-				"pagePath":"pages/class/class",
-				"iconPath":"static/arc.png",
-				 "selectedIconPath" : "static/tab-home-current.png",
-				"text" : "分类"
-			},
+// 			{
+// 				"pagePath":"pages/class/class",
+// 				"iconPath":"static/arc.png",
+// 				 "selectedIconPath" : "static/tab-home-current.png",
+// 				"text" : "分类"
+// 			},
 			{
 				"pagePath":"pages/cate/cate",
 				"iconPath":"static/arc.png",
